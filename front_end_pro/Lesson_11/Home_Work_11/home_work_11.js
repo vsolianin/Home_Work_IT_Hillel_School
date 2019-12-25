@@ -4,13 +4,30 @@ console.log(`Задача 1. Создать класс SuperMath. Добавит
 znak(которое описано в прототипе), иначе - запросить ввод новых данных через метод input()
 класса SuperMath.`);
 
-obj = {};
+obj = {
+	znak: "*"
+};
 
 do {
 	obj.x = +prompt("Пожалуйста, введите арифметическое значение X");
 	obj.y = +prompt("Пожалуйста, введите арифметическое значение Y");		
 	obj.znak = prompt("Пожалуйста, введите знак арифметической операции");
-} while(isNaN(obj.x) || isNaN(obj.y) || typeof obj.znak !== "string");
+} while(isNaN(obj.x) || isNaN(obj.y) || obj.znak !== foo(obj.znak));
+
+function foo(znak) {
+	var mass = ["+", "-", "*", "/"]
+
+	for(i = 0, counter = 0; i < mass.length; i++) {
+		if(mass[i] === znak) {
+			counter++;
+		}
+	}
+	if(counter > 0) {
+		return znak;
+	} else {
+		return false;
+	}
+}
 
 SuperMath.prototype.math = function(obj) {
 	var math;
@@ -34,10 +51,6 @@ SuperMath.prototype.math = function(obj) {
 			case "*":
 			math = obj.x * obj.y;
 			break;
-
-			case "^":
-			math = obj.x ^ obj.y;
-			break;
 		}
 
 		return math;
@@ -51,7 +64,7 @@ function SuperMath() {
 			obj.x = +prompt("Пожалуйста, введите арифметическое значение X");
 			obj.y = +prompt("Пожалуйста, введите арифметическое значение Y");		
 			obj.znak = prompt("Пожалуйста, введите знак арифметической операции");
-		} while(isNaN(obj.x) || isNaN(obj.y) || typeof obj.znak !== "string");
+		} while(isNaN(obj.x) || isNaN(obj.y) || obj.znak !== foo(obj.znak));
 		
 		return obj;
 	}
@@ -71,3 +84,5 @@ doMath = new SuperMath();
 
 res = doMath.check(obj);
 console.log(res, "res");
+
+
