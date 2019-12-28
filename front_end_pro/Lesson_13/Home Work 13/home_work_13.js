@@ -9,55 +9,98 @@ window.onload = function() {
 	var first = [];
 	var second = [];
 	var third = [];
-	var main = [];
-	console.log(main, "main");
-	console.log(first, "first");
+	var start;
+	var selection; 
+	var end;
+
 	first_input.oninput = function(event) {
 
-		if(event.data == null) {
+		if (selection == undefined && event.data == null) {
+			first.concat(first.pop(event.data));
+			text_area.textContent = first.join("");
+
+		} else if (start >= 0 && event.data == null) {
 			(function() {
-				first.concat(first.pop(event.data));
+				first.splice(start, (end - start));
 				text_area.textContent = first.join("");
+				start = undefined;
+				end = undefined;
+				selection = undefined;	
 			}());
+			
 		} else {
 			(function() {
 				first.concat(first.push(event.data));
 				text_area.textContent = first.join("");
 			}());
 		}
-		console.log(first, "first");
-		console.log(text_area.textContent, "text_area.textContent");
-		// console.log(main, "main");
 	}
+
 
 	second_input.oninput = function(event) {
 
-		if(event.data == null) {
+		if (selection == undefined && event.data == null) {
+			second.concat(second.pop(event.data));
+			text_area.textContent = second.join("");
+
+		} else if (start >= 0 && event.data == null) {
 			(function() {
-				second.concat(second.pop(event.data));
+				second.splice(start, (end - start));
 				text_area.textContent = second.join("");
+				start = undefined;
+				end = undefined;
+				selection = undefined;	
 			}());
+
 		} else {
 			(function() {
 				second.concat(second.push(event.data));
 				text_area.textContent = second.join("");
 			}());
 		}
-		
 	}
 
 	third_input.oninput = function(event) {
 
-		if(event.data == null) {
+		if (selection == undefined && event.data == null) {
+			third.concat(third.pop(event.data));
+			text_area.textContent = third.join("");
+
+		} else if (start >= 0 && event.data == null) {
 			(function() {
-				text_area.textContent = text_area.textContent.slice(0, -1);
+				third.splice(start, (end - start));
+				text_area.textContent = third.join("");
+				start = undefined;
+				end = undefined;
+				selection = undefined;	
 			}());
+			
 		} else {
 			(function() {
-				text_area.textContent += event.data;
+				third.concat(third.push(event.data));
+				text_area.textContent = third.join("");
 			}());
 		}
-		console.log(text_area.textContent, "third");
 	}
 
+	second_input.onselect = function (event) {
+		select(event);
+	}
+
+	first_input.onselect = function (event) {
+		select(event);
+	}
+
+	third_input.onselect = function (event) {
+		select(event);
+	}
+
+	function select(event) {
+		selection = event.target.selectionStart;
+		console.dir(event, "onselect");	
+		start = event.target.selectionStart;
+		end = event.target.selectionEnd;
+
+		return [select, start, end];
+	}
 }
