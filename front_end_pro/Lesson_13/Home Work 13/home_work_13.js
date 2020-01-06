@@ -3,23 +3,18 @@ window.onload = function() {
 
 	var text_area = document.querySelector("#text");
 	text_area.textContent = "";
+	var mass = [];
 	var inp = document.querySelectorAll("input");
-	for(i = 0; i < inp.length; i++) {
+	
+	for(i = 0; i < inp.length; i++) {	
 
-		inp[i].onchange = function(event) {
+		inp[i].onchange = function() {
+			mass[mass.length] = this.value;
 			setTimeout(function() {
-				text_area.textContent = text_area.textContent.concat(event.target.value + ", ");
-			}, 500);
-		}
-
-		inp[i].oninput = function(event) {
-			if(event.data == null) {
-				console.dir(this, "this");
-				this.value = "";
-			}
+				text_area.textContent = mass;
+			}, 500);	
 		}
 	}
-
 	
 	// var text_area = document.querySelector("#text");
 	// console.dir(text_area);
