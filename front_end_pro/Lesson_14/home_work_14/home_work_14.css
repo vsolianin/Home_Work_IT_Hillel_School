@@ -1,0 +1,17 @@
+body {
+	margin: 0;
+}
+
+.box {
+	border: 3px solid black;
+	width: 200px;
+	height: 200px;	
+	display: inline-block;
+	position: absolute;	
+}
+
+.colorBorder {
+	background-color: red; 
+	border-color: green;
+}
+
